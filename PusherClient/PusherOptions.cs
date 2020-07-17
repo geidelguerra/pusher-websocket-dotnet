@@ -5,6 +5,8 @@
     /// </summary>
     public class PusherOptions
     {
+        private string _host = null;
+
         /// <summary>
         /// Gets or sets whether the connection will be encrypted
         /// </summary>
@@ -20,6 +22,18 @@
         /// </summary>
         public string Cluster { get; set; } = "mt1";
 
-        internal string Host => $"ws-{Cluster}.pusher.com";
+        public string Host {
+            get {
+                if (_host == null || _host.Length == 0) {
+                    _host = $"ws-{Cluster}.pusher.com";
+                }
+
+                return _host;
+            }
+
+            set {
+                _host = value;
+            }
+        }
     }
 }
