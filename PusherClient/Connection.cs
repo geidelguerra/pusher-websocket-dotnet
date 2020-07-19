@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebSocket4Net;
+using System.Security.Authentication;
 
 namespace PusherClient
 {
@@ -57,7 +58,7 @@ namespace PusherClient
             ChangeState(ConnectionState.Initialized);
             _allowReconnect = true;
 
-            _websocket = new WebSocket(_url)
+            _websocket = new WebSocket(_url, sslProtocols: SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls)
             {
                 EnableAutoSendPing = true,
                 AutoSendPingInterval = 1
